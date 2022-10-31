@@ -2,10 +2,8 @@ package entity.drug;
 
 import base.entity.BaseEntity;
 import entity.prescription.Prescription;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToMany;
+import entity.prescription_drug.PrescriptionDrug;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +15,7 @@ public class Drug extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private DrugType type;
     private Double price;
-    @ManyToMany(mappedBy = "drugs")
-    private Set<Prescription> prescriptions = new HashSet<>();
+    @OneToMany(mappedBy = "drug")
+    private Set<PrescriptionDrug> prescriptionDrugs = new HashSet<>();
 
 }

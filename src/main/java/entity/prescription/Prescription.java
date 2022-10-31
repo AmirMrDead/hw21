@@ -1,10 +1,10 @@
 package entity.prescription;
 
 import base.entity.BaseEntity;
-import entity.drug.Drug;
 import entity.patient.Patient;
+import entity.prescription_drug.PrescriptionDrug;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class Prescription extends BaseEntity {
 
     @OneToOne(mappedBy = "prescription")
     private Patient patient;
-    @ManyToMany
-    private Set<Drug> drugs = new HashSet<>();
+    @OneToMany(mappedBy = "prescription")
+    private Set<PrescriptionDrug> prescriptionDrugs  = new HashSet<>();
 
 }
