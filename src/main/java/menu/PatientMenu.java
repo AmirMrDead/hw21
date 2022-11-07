@@ -19,12 +19,13 @@ public class PatientMenu {
             String command = scanner.next();
             if(command.equalsIgnoreCase("1")){
                 PatientOperations patientOperations = new PatientOperations();
-                patientOperations.showInformation(patient);
+                patientOperations.showPersonalInformation(patient);
             } else if(command.equalsIgnoreCase("2")){
                 PatientOperations patientOperations = new PatientOperations();
-                patientOperations.showInformation2(patient);
+                patientOperations.showMedicalInformation(patient);
             } else if(command.equalsIgnoreCase("3")){
-
+                PatientOperations patientOperations = new PatientOperations();
+                patientOperations.getAnAppointment(patient);
             } else if(command.equalsIgnoreCase("4")){
                 break;
             } else {

@@ -2,11 +2,16 @@ package repository.patient.impl;
 
 import base.repository.impl.BaseRepositoryImpl;
 import entity.patient.Patient;
+import jakarta.persistence.EntityManager;
 import repository.patient.PatientRepository;
 
 import java.util.Optional;
 
 public class PatientRepositoryImpl extends BaseRepositoryImpl<Patient> implements PatientRepository {
+    public PatientRepositoryImpl(EntityManager em) {
+        super(em);
+    }
+
     @Override
     public Class<Patient> getEntityClass() {
         return Patient.class;

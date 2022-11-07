@@ -8,10 +8,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class PrescriptionDrug{
 
     @EmbeddedId

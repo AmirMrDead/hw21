@@ -5,13 +5,9 @@ import jakarta.persistence.Persistence;
 
 public class Hibernate {
 
-    private static EntityManagerFactory ENTITY_MANAGER_FACTORY;
+    private Hibernate(){}
+    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("clinic");
 
-    public static EntityManagerFactory getEntityManagerFactory() {
-        if (ENTITY_MANAGER_FACTORY == null) {
-            ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("clinic");
-        }
-        return ENTITY_MANAGER_FACTORY;
-    }
+    public static EntityManagerFactory getEntityManagerFactory(){return ENTITY_MANAGER_FACTORY;}
 
 }

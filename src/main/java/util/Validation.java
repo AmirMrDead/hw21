@@ -2,6 +2,7 @@ package util;
 
 import entity.patient.Patient;
 import menu.PatientMenu;
+import repository.patient.impl.PatientRepositoryImpl;
 import service.patient.PatientService;
 import service.patient.impl.PatientServiceImpl;
 
@@ -11,6 +12,8 @@ import java.util.Scanner;
 public class Validation {
 
     private final Scanner scanner = new Scanner(System.in);
+    PatientService patientService = new PatientServiceImpl(
+            new PatientRepositoryImpl(Hibernate.getEntityManagerFactory().createEntityManager()));
 
     public void loginMenu(String type) {
         System.out.print("Enter your national code: ");
@@ -18,7 +21,6 @@ public class Validation {
         System.out.print("Enter your password: ");
         String password = scanner.next();
         if(type.equalsIgnoreCase("patient")){
-            PatientService patientService = new PatientServiceImpl();
             Optional<Patient> optionalUser = patientService.login(nationalCode, password);
             optionalUser.ifPresentOrElse(user -> {
                 PatientMenu patientMenu = new PatientMenu();
@@ -33,12 +35,12 @@ public class Validation {
         System.out.print("Enter your lastname: ");
         String lastname = validName(scanner.next());
         System.out.print("Enter your nationalCode: ");
-        String username = checkExistNationalCode(scanner.next());
+        String username = scanner.next();
         System.out.print("Enter your password: ");
         String password = scanner.next();
         if(type.equalsIgnoreCase("patient")){
-            PatientService patientService = new PatientServiceImpl();
             Patient patient = new Patient(firstname, lastname, username, password);
+            System.out.println("aa");
             patientService.saveOrUpdate(patient);
         }
     }
@@ -60,7 +62,6 @@ public class Validation {
             }
             break;
         }
-        System.out.println(value);
         return value;
     }
 
@@ -87,7 +88,6 @@ public class Validation {
 
     private String checkExistNationalCode(String nationalCode) {
         while (true) {
-            PatientService patientService = new PatientServiceImpl();
             Optional<Patient> optionalUser = patientService.findByNationalCode(nationalCode);
             if (optionalUser.isPresent()) {
                 System.out.print("This national code exist. choose another one: ");

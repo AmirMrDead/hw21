@@ -2,10 +2,9 @@ package entity;
 
 import base.entity.BaseEntity;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -19,4 +18,16 @@ public class Person extends BaseEntity {
     private String nationalCode;
     private String password;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(nationalCode, person.nationalCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nationalCode);
+    }
 }

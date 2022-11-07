@@ -6,33 +6,48 @@ import base.service.BaseService;
 import jakarta.persistence.EntityManager;
 import util.Hibernate;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseServiceImpl<E extends BaseEntity> implements BaseService<E> {
+public class BaseServiceImpl <E extends BaseEntity,R extends BaseRepository<E>>
+        implements BaseService<E> {
 
-    protected abstract BaseRepository<E> getBaseRepository();
-    protected final EntityManager em = Hibernate.getEntityManagerFactory().createEntityManager();
+    protected final R repository;
+
+    public BaseServiceImpl(R repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void saveOrUpdate(E entity) {
-        em.getTransaction().begin();
-        getBaseRepository().saveOrUpdate(entity);
-        em.getTransaction().commit();
+        repository.getEntityManager().getTransaction().begin();
+        repository.saveOrUpdate(entity);
+        repository.getEntityManager().getTransaction().commit();
     }
 
     @Override
     public Optional<E> loadById(Long id) {
         try {
-            return getBaseRepository().loadById(id);
-        }catch (Exception e){
+            return repository.loadById(id);
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
 
     @Override
     public void delete(E entity) {
-        em.getTransaction().begin();
-        getBaseRepository().delete(entity);
-        em.getTransaction().commit();
+        repository.getEntityManager().getTransaction().begin();
+        repository.delete(entity);
+        repository.getEntityManager().getTransaction().commit();
+    }
+
+    @Override
+    public List<E> loadAll() {
+        try {
+            return repository.loadAll();
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 }

@@ -1,24 +1,22 @@
 package service.patient.impl;
 
-import base.repository.BaseRepository;
 import base.service.impl.BaseServiceImpl;
 import entity.patient.Patient;
 import repository.patient.PatientRepository;
-import repository.patient.impl.PatientRepositoryImpl;
 import service.patient.PatientService;
 
 import java.util.Optional;
 
-public class PatientServiceImpl extends BaseServiceImpl<Patient> implements PatientService {
-    @Override
-    protected BaseRepository<Patient> getBaseRepository() {
-        return new PatientRepositoryImpl();
+public class PatientServiceImpl extends BaseServiceImpl<Patient,PatientRepository> implements PatientService {
+
+    public PatientServiceImpl(PatientRepository repository) {
+        super(repository);
     }
 
     @Override
     public Optional<Patient> findByNationalCode(String nationalCode) {
         try {
-            return ((PatientRepository) getBaseRepository()).findByNationalCode(nationalCode);
+            return repository.findByNationalCode(nationalCode);
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -27,7 +25,7 @@ public class PatientServiceImpl extends BaseServiceImpl<Patient> implements Pati
     @Override
     public Optional<Patient> login(String nationalCode, String password) {
         try {
-            return ((PatientRepository) getBaseRepository()).login(nationalCode, password);
+            return repository.login(nationalCode, password);
         } catch (Exception e) {
             return Optional.empty();
         }

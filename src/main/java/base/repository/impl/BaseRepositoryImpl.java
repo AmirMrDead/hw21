@@ -3,19 +3,23 @@ package base.repository.impl;
 import base.entity.BaseEntity;
 import base.repository.BaseRepository;
 import jakarta.persistence.EntityManager;
-import util.Hibernate;
 
+import java.util.List;
 import java.util.Optional;
 
 public abstract class BaseRepositoryImpl<E extends BaseEntity> implements BaseRepository<E> {
 
     public abstract Class<E> getEntityClass();
 
-    protected final EntityManager em = Hibernate.getEntityManagerFactory().createEntityManager();
+    protected final EntityManager em;
+
+    protected BaseRepositoryImpl(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public void saveOrUpdate(E entity) {
-        if (entity.isNow()) {
+        if (Boolean.TRUE.equals(entity.isNow())) {
             em.persist(entity);
         } else {
             em.merge(entity);
@@ -30,5 +34,16 @@ public abstract class BaseRepositoryImpl<E extends BaseEntity> implements BaseRe
     @Override
     public void delete(E entity) {
         em.remove(entity);
+    }
+
+    @Override
+    public List<E> loadAll() {
+        String jpql = "from " + getEntityClass().getSimpleName();
+        return em.createQuery(jpql, getEntityClass()).getResultList();
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+        return em;
     }
 }

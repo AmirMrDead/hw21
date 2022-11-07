@@ -1,14 +1,13 @@
 package service.doctor.impl;
 
-import base.repository.BaseRepository;
 import base.service.impl.BaseServiceImpl;
 import entity.doctor.Doctor;
-import repository.doctor.impl.DoctorRepositoryImpl;
+import repository.doctor.DoctorRepository;
 import service.doctor.DoctorService;
 
-public class DoctorServiceImpl extends BaseServiceImpl<Doctor> implements DoctorService {
-    @Override
-    protected BaseRepository<Doctor> getBaseRepository() {
-        return new DoctorRepositoryImpl();
+public class DoctorServiceImpl extends BaseServiceImpl<Doctor, DoctorRepository> implements DoctorService {
+
+    public DoctorServiceImpl(DoctorRepository repository) {
+        super(repository);
     }
 }

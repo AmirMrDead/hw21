@@ -1,7 +1,6 @@
 package entity.drug;
 
 import base.entity.BaseEntity;
-import entity.prescription.Prescription;
 import entity.prescription_drug.PrescriptionDrug;
 import jakarta.persistence.*;
 import lombok.Getter;
