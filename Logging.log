@@ -1,0 +1,12 @@
+2022-11-08 10:11:46 | INFO  | i.m.s.a.i.AdminServiceImpl | login admin
+2022-11-08 10:11:46 | DEBUG | i.m.s.a.i.AdminServiceImpl | try to login for admin
+2022-11-09 11:27:26 | INFO  | i.m.h.s.p.i.PatientServiceImpl | login patient
+2022-11-09 11:27:26 | DEBUG | i.m.h.s.p.i.PatientServiceImpl | tru to login patient
+2022-11-09 11:27:26 | DEBUG | i.m.h.r.p.i.PatientRepositoryImpl | execute jpql for login patient
+2022-11-09 11:27:33 | INFO  | i.m.h.u.PatientOperations | show personal patients information
+2022-11-09 11:27:36 | INFO  | i.m.h.u.PatientOperations | show personal medicals patients information
+2022-11-09 11:28:24 | INFO  | i.m.h.s.p.i.PatientServiceImpl.login | login patient
+2022-11-09 11:28:24 | DEBUG | i.m.h.s.p.i.PatientServiceImpl.login | tru to login patient
+2022-11-09 11:28:24 | DEBUG | i.m.h.r.p.i.PatientRepositoryImpl.login | execute jpql for login patient
+2022-11-09 11:28:26 | INFO  | i.m.h.u.PatientOperations.showPersonalInformation | show personal patients information
+2022-11-09 11:28:27 | INFO  | i.m.h.u.PatientOperations.showMedicalInformation | show personal medicals patients information
